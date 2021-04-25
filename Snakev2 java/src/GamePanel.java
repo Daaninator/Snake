@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements ActionListener{
 			g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 			
 			//zal snake drawe
-			for (int i = 0; i<bodyParts; i++) {
+			for (int i = bodyParts-1; i>=0; i--) {
 				if (i ==0) {
 					g.setColor(Color.green);
 					g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
@@ -184,11 +184,8 @@ public class GamePanel extends JPanel implements ActionListener{
 		
 		g.setColor(new Color(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
 		gameOver = "press enter to restart";
-		g.drawString(gameOver, (SCREEN_WIDTH - metrics2.stringWidth(gameOver))/2, SCREEN_HEIGHT/2+25);
-
-		
+		g.drawString(gameOver, (SCREEN_WIDTH - metrics2.stringWidth(gameOver))/2, SCREEN_HEIGHT/2+25);	
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -231,9 +228,11 @@ public class GamePanel extends JPanel implements ActionListener{
 					direction = 'D';
 				}
 				break;
+			//ALS ENTER DAN GAME RESTART
 			case KeyEvent.VK_ENTER:
-				if (!running) { 
+				if ((!running) || (running)){ 
 					running = true;	
+					//
 					if (applesEaten>highscore) highscore = applesEaten;
 					bodyParts = 6;
 					applesEaten = 0;
@@ -247,5 +246,6 @@ public class GamePanel extends JPanel implements ActionListener{
 			
 		}
 	}
-}
+	}
+
 }
